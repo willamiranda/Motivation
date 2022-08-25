@@ -6,13 +6,14 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.motivacao.infra.MotivationConstants
 import com.example.motivacao.R
+import com.example.motivacao.data.Mock
 import com.example.motivacao.infra.SecurityPreferences
 import com.example.motivacao.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var  binding: ActivityMainBinding
-    private var categoryId = 1
+    private var categoryId = MotivationConstants.FILTER.ALL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         handleUserName()
         handleFilter(R.id.image_ball)
+        handleNextPhrase()
         //events
         binding.buttonNewPhrase.setOnClickListener(this)
         binding.imageBall.setOnClickListener(this)
@@ -35,10 +37,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View) {
         if(view.id == R.id.button_new_phrase){
-            var s = ""
+            handleNextPhrase()
         }else if (view.id in listOf(R.id.image_ball, R.id.image_happy, R.id.image_sunny)){
             handleFilter(view.id)
         }
+    }
+
+    private fun handleNextPhrase(){
+
+        binding.textPhrase.text = Mock().getPhrase(categoryId)
     }
 
     private fun handleFilter(id:Int){
