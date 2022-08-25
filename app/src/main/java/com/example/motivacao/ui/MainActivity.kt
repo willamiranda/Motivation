@@ -50,18 +50,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when (id) {
             R.id.image_ball -> {
                 binding.imageBall.setColorFilter(ContextCompat.getColor(this,R.color.white))
-                categoryId = 1
+                categoryId = MotivationConstants.FILTER.ALL
             }
             R.id.image_happy -> {
                 binding.imageHappy.setColorFilter(ContextCompat.getColor(this,R.color.white))
-                categoryId = 2
+                categoryId = MotivationConstants.FILTER.HAPPY
             }
             R.id.image_sunny -> {
                 binding.imageSunny.setColorFilter(ContextCompat.getColor(this,R.color.white))
-                categoryId = 3
+                categoryId = MotivationConstants.FILTER.SUNNY
             }
         }
     }
+
 
     private fun handleUserName(){
         val name = SecurityPreferences(this).getString(MotivationConstants.KEY.USER_NAME)
